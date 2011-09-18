@@ -1,0 +1,314 @@
+/*
+Theme Name:     Karma Perso
+Theme URI:      http://themeforest.net/item/karma-clean-and-modern-wordpress-theme/168737?ref=TrueThemes
+Description:    Child theme for the Karma theme 
+Author:         TrueThemes
+Author URI:     http://themeforest.net/user/TrueThemes?ref=TrueThemes
+Template:       Karma
+Version:        0.1.0
+*/
+
+@import url("../Karma/style.css");
+
+
+aside {
+    position: relative;
+}
+
+aside h3 {
+    background: #369;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 0 0 10px 0;
+}
+
+/* Class name via Modernizr */
+.csstransforms aside {
+    border-left: 34px solid #369;
+
+    /* Make a little room */
+    padding-left: 10px;
+}
+.csstransforms aside h3 {
+
+    /* Abs positioning makes it not take up vert space */
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* Border is the new background */
+    background: none;
+
+    /* Rotate from top left corner (not default) */
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin:    0 0;
+    -ms-transform-origin:     0 0;
+    -o-transform-origin:      0 0;
+
+    -webkit-transform: rotate(90deg);
+    -moz-transform:    rotate(90deg);
+    -ms-transform:     rotate(90deg);
+    -o-transform:      rotate(90deg);
+}
+
+#menu-main-nav {
+    float: right;
+    list-style: none outside none;
+    margin-top: 85px;
+    padding: 0;
+}
+
+#menu-main-nav li {
+    float: left;
+    height: 1%;
+    margin-right: -20px;
+    padding: 0 25px 12px 7px;
+    position: relative;
+    vertical-align: top;
+}
+
+#header .header-area {
+    margin: 0 auto;
+    padding: 0 0;
+    width: 980px;
+}
+
+.widgettitle {
+    font-size: 1.7em;
+    display:none;
+}
+
+.login{
+	position:absolute;
+	left: 918px;
+    top: 13px;
+}
+
+.creerCompte{
+	position:absolute;
+	left: 750px;
+    top: 13px;
+}
+
+.logout{
+	position:absolute;
+	left: 936px;
+    top: 13px;
+}
+
+.espace-adherent{
+	position:absolute;
+	left: 768px;
+    top: 13px;
+}
+
+.espace-administration{
+	position:absolute;
+	left: 608px;
+    top: 13px;
+}
+
+.espace-profil{
+	position:absolute;
+	left: 635px;
+    top: 13px;
+}
+
+
+/*#login-popup .form-holder {
+    padding: 10px;
+    background-color:#FFF;
+    width:164px;
+    position:relative;
+    top:35px;
+    left:608px;
+}
+*/
+
+#login-popup {
+	z-index:10;
+    position: absolute;
+    left: 923px;
+    top: 51px;
+    width: 186px;
+    display: none;
+//    border: 1px solid #CCC;
+    /*background: transparent url("images/btn-sign-bottom.png") no-repeat bottom;*/
+    background: transparent url("images/btn-login-repeat.png") repeat-y ;
+}
+
+
+
+#login-bottom{
+	background: url("images/btn-login-bottom.png") no-repeat bottom;
+	height:6px;
+	width: 184px;
+}
+
+#login-popup .form label {
+    width: 80px;
+}
+#login-popup .form-holder {
+    /*background: none;*/
+    padding: 3px 10px;
+}
+#login-popup .form {
+	font-size:12px;
+	color:#DCDCDC;
+    width: 100%;
+    /*background: #DCDCDC;*/
+}
+
+.align-center a{
+	color:#DCDCDC;
+}
+
+#login-popup .form .text input,
+#login-popup .form .text {
+    width: 155px;
+    height:15px;
+}
+#login-popup .form-section {
+    margin-bottom: 5px;
+}
+
+
+.form-holder, .section-holder {
+   /*background: url("images/bg-form-b.gif") no-repeat scroll 0 100% transparent;*/
+    overflow: hidden;*/
+    padding: 12px 18px 17px 20px;
+}
+
+form, fieldset {
+    border-style: none;
+}
+
+form, fieldset {
+    border-style: none;
+}
+
+.submit{
+	padding:0px;
+}
+
+.account-submit{
+	margin-left:35px;
+}
+
+body{
+	margin: auto;
+    width: 1000px;
+}
+
+html{
+	background:url(images/side-bg.gif) repeat;
+}
+
+#faNomEquipeE{
+	color:#F00;
+}
+
+#faNomE{
+	color:#F00;
+}
+
+#faPrenomE{
+	color:#F00;
+}
+
+#faMailE{
+	color:#F00;
+}
+
+#faEquipeE{
+	color:#F00;
+}
+
+
+#faAdresseE{
+	color:#F00;
+}
+
+#faCodePostalE{
+	color:#F00;
+}
+
+#faVilleE{
+	color:#F00;
+}
+
+#faFixeE{
+	color:#F00;
+}
+
+#faPortableE{
+	color:#F00;
+}
+
+#faPassE{
+	color:#F00;
+}
+
+#faAccesE{
+	color:#F00;
+}
+
+#tabAdherent{
+	font-size:12px;
+	text-align:center;
+}
+
+.details{
+	background:url(images/details.png) no-repeat;
+	height:16px;
+	width:20px;
+}
+.modif{
+	background:url(images/modif.png) no-repeat;
+	height:16px;
+	width:20px;
+}
+.delete{
+	background:url(images/delete.png) no-repeat;
+	height:16px;
+	width:20px;
+}
+
+.adresse{
+    width: 230px;
+}
+
+
+.post_content {
+    background: url("images/dateResultat.png") no-repeat scroll 577px 0 transparent;
+}
+
+.erreur {
+    background: url("../Karma/images/_global/ico2.gif") no-repeat scroll 20px center #F5DCD8;
+    padding : 20px 20px 20px 60px;
+    border: 1px solid #CDBFBE;
+    border-radius: 5px 5px 5px 5px;
+    margin-top:10px;
+}
+
+.information{
+    background: url("../Karma/images/_global/ico3.gif") no-repeat scroll 20px center #DAE6F2;
+    padding : 20px 20px 20px 60px;
+    border: 1px solid #BDC4CA;
+    border-radius: 5px 5px 5px 5px;
+    margin-top:10px;
+}
+
+#accesOuvert{
+	background: url("images/check.png") no-repeat;
+	height:20px;
+	width:20px;
+}
+
+#accesFerme{	
+	background: url("images/lock.png") no-repeat;
+	height:20px;
+	width:20px;
+}
+
+/* ------- Insert custom styles below this line ------- */
