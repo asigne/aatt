@@ -34,7 +34,7 @@ Template Name: Left Nav Adminitration
 			<div id="content">
 			
 			<?php
-				$query = mysql_query("SELECT a.idAdherent, a.nom, a.prenom, a.mail, a.telportable, a.acces, e.nomEquipe FROM kv_adherents a, kv_equipes e WHERE e.idEquipe=a.idEquipe and a.acces=0");	
+				$query = mysql_query("SELECT a.idAdherent, a.nom, a.prenom, a.mail, a.telportable, a.acces, e.nomEquipe, a.civilite FROM kv_adherents a, kv_equipes e WHERE e.idEquipe=a.idEquipe and a.acces=0");	
 				affichageAdherent($query);
 			?>	
 	

@@ -33,7 +33,7 @@ Template Name: Left Nav gestionAdherents
 	<?php } ?>		
 			<div id="content">
 <?php //if(have_posts()) : while(have_posts()) : the_post(); the_content(); endwhile; endif;
-			$query = mysql_query("SELECT a.idAdherent, a.nom, a.prenom, a.mail, a.telportable, a.acces, e.nomEquipe FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe");	
+			$query = mysql_query("SELECT a.idAdherent, a.nom, a.prenom, a.mail, a.telportable, a.acces, e.nomEquipe, a.civilite FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe");	
 			affichageAdherent($query);
 		?>	
 			
