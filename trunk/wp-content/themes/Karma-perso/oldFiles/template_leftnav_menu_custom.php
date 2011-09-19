@@ -1,10 +1,7 @@
 <?php
 /*
-Template Name: Full Width creerCompte
+Template Name: Left Nav Menu Custom
 */
-?>
-<?php
-  //   session_start();
 ?>
 <?php get_header(); ?>
 </div><!-- header-area -->
@@ -22,22 +19,19 @@ $post_id = $post->ID;
 $meta_value = get_post_meta($post_id,'truethemes_page_checkbox',true);
 
 if(empty($meta_value)){
-load_template(TEMPLATEPATH . '/functions/global/subnav-horizontal.php');}else{
-// do nothing
-}
-?>
-<div id="content" class="content_full_width">
+load_template(TEMPLATEPATH . '/functions/global/subnav-left-menu-custom.php');
+}else{ ?>
 
-<?php
-	if ($_SESSION['connecte'] == 0){
-		formulaireInscription(get_bloginfo('url')."/creerCompte", 0);
-	}
-	else{
-		echo "<div class=\"erreur\">Vous avez déjà un compte adhérent !</div>";
-	}
-?>	
+<div id="sub_nav">
+<ul class="sub-menu">
+<?php generated_dynamic_sidebar(); ?>
+</ul>
+</div><!-- end sub_nav -->
+<?php } ?>
 
-</div><!-- end content -->
+<div id="content">
+<?php if(have_posts()) : while(have_posts()) : the_post(); the_content(); endwhile; endif; ?>
+</div><!-- end content -->		
 </div><!-- end main-holder -->
 </div><!-- main-area -->
 

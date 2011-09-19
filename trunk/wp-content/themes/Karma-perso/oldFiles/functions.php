@@ -28,7 +28,7 @@ function formulaireInscription($page, $mode){
 					<tr>
 						<td><label id="faEquipe">Equipe :</label></td>
 						<td>';
-							listeEquipe("");
+							listeEquipe();
 		echo		'</td>
 					</tr>
 					<tr >
@@ -85,12 +85,10 @@ function formulaireInscription($page, $mode){
 		else{
 			$req = "INSERT INTO kv_adherents VALUES ('','".$_POST['mail']."','".md5($_POST['pass'])."','".strtoupper($_POST['nom'])."','".ucfirst($_POST['prenom'])."','".$_POST['adresse']."','".$_POST['codePostal']."','".strtoupper($_POST['ville'])."','".$_POST['fixe']."','".$_POST['portable']."','','0', '0','".$_POST['equipe']."','".$_POST['civilite']."')";
 		}
-		$reqVerif = "select * FROM kv_adherents WHERE mail='".$_GET['mail']."'";
-		if(!mysql_fetch_array(mysql_query($reqVerif))){
-			$query = mysql_query($req);
-		}		
+		$query = mysql_query($req);
+		mysql_fetch_array($query);
 		if($mode){
-			echo '<meta http-equiv="refresh" content="0;url=administration/gestion-des-adherents/" />';
+			echo '<meta http-equiv="refresh" content="0;url=/administration/gestion-des-adherents/" />';
 		}
 		else{
 			echo '<div class="information">Votre compte a été crée avec succès, vous recevrez un email dès que l\'administrateur aura validé votre inscription !</div>';
@@ -100,7 +98,7 @@ function formulaireInscription($page, $mode){
 
 function formulaireModification($page, $data, $mode){
 	if($_POST['verif'] != "ok"){
-		echo '<form id="formAdherent" name="formAdherent" action='.$page."?id=".$_GET['id'].' method="post">
+		echo '<form id="formAdherent" name="formAdherent" action='.$page.' method="post">
 				<table>
 					<tr>
 						<td><label id="faNom">Civilité :</label></td>
@@ -159,11 +157,8 @@ function formulaireModification($page, $data, $mode){
 				}
 				echo'<tr>
 						<td><label id="faPass">Mot de passe :</label>
-						<td><input type="password" name="pass"/></td>';
-				if($mode){				
-						echo '<td>(Facultatif)</td>';
-				}
-				echo'	</tr>
+						<td><input type="password" name="pass"/></td>
+					</tr>
 					<tr>
 						<td><input type="hidden" name="verif" value="ok"/></td>
 						<td><input type="hidden" name="idAdherent" value="'.$data[0].'"/></td>
@@ -186,12 +181,17 @@ function formulaireModification($page, $data, $mode){
 			}
 		}
 		else{
+			if($_POST['pass']==""){
+				$req = "UPDATE kv_adherents SET civilite='".$_POST['civilite']."', nom='".strtoupper($_POST['nom'])."', prenom='".ucfirst($_POST['prenom'])."', adresse='".$_POST['adresse']."', codepostal='".$_POST['codePostal']."', ville='".strtoupper($_POST['ville'])."', teldomicile='".$_POST['fixe']."', telportable='".$_POST['portable']."', idEquipe='".$_POST['equipe']."' WHERE idAdherent='".$_POST['idAdherent']."'";
+			}
+			else{
 				$req = "UPDATE kv_adherents SET civilite='".$_POST['civilite']."', pass='".md5($_POST['pass'])."', nom='".strtoupper($_POST['nom'])."', prenom='".ucfirst($_POST['prenom'])."', adresse='".$_POST['adresse']."', codepostal='".$_POST['codePostal']."', ville='".strtoupper($_POST['ville'])."', teldomicile='".$_POST['fixe']."', telportable='".$_POST['portable']."', idEquipe='".$_POST['equipe']."' WHERE idAdherent='".$_POST['idAdherent']."'";			
 			}
+		}
 		$query = mysql_query($req);
 		echo '<div class="information">Modification effectuée</div>';
 		if($mode){
-	//		echo '<meta http-equiv="refresh" content="0;url=administration/gestion-des-adherents/" />';
+			echo '<meta http-equiv="refresh" content="0;url=/administration/gestion-des-adherents/" />';
 		}
 	}
 }
@@ -220,14 +220,14 @@ function formulaireAjoutEquipe($page){
 		echo $req;
 		$query = mysql_query($req);
 		mysql_fetch_array($query);
-		echo "<div class=\"information\">Equipe ajoutée avec succès</div>";
-		echo '<meta http-equiv="refresh" content="0;url=administration/gestion-des-equipes/" />';
+		echo "Equipe ajoutée avec succès";
+		echo '<meta http-equiv="refresh" content="0;url=/administration/gestion-des-equipes/" />';
 	}
 }
 
 function formulaireModificationEquipe($page, $data){
 	if($_POST['verif'] != "ok"){
-		echo '<form id="formEquipe" name="formEquipe" action='.$page."?id=".$_GET['id'].' method="post">
+		echo '<form id="formEquipe" name="formEquipe" action='.$page.' method="post">
 				<table>
 					<tr>
 						<td><label id="faNomEquipe">Nom :</label></td>
@@ -248,8 +248,8 @@ function formulaireModificationEquipe($page, $data){
 		//modification dans la base		
 		$req = "UPDATE kv_equipes SET nomEquipe='".strtoupper($_POST['nom'])."' WHERE idEquipe='".$_POST['idEquipe']."'";
 		$query = mysql_query($req);
-		echo "<div class=\"information\">Modification effectuée</div>";
-		echo '<meta http-equiv="refresh" content="0;url=administration/gestion-des-equipes/" />';
+		echo "Modification effectuée";
+		echo '<meta http-equiv="refresh" content="0;url=/administration/gestion-des-equipes/" />';
 	}
 }
 
@@ -294,8 +294,8 @@ function affichageAdherent($query){
 			echo '</a></td>';
 			
 	//					$param="id=".$data['0']."&mail=".$data['1']."&nom".$data['3']."&prenom=".$data['4']."&adresse=".$data['5']."&codepostal=".$data['6']."&ville=".$data['7']."&fixe=".$data['8']."&portable=".$data['9']."&classement=".$data['10']."&acces=".$data['12']."&equipe=".$data['13'];
-			echo '<td><a href="/administration/gestion-des-adherents/details-adherent/?id='.$data['0'].'"><div class="details"></div></a></td>';
-			echo '<td><a href="/administration/gestion-des-adherents/modifier-un-adherent/?id='.$data['0'].'"><div class="modif"></div></a></td>';
+			echo '<td><a href="/administration/details-adherent/?id='.$data['0'].'"><div class="details"></div></a></td>';
+			echo '<td><a href="/administration/modifier-un-adherent/?id='.$data['0'].'"><div class="modif"></div></a></td>';
 			echo '<td><a href="javascript:supprimerAdherent('.$data['0'].', \''.$data['1'].'\',\''.$data['2'].'\')"><div class="delete"></div></a></td>';
 			echo '</tr>';
 		}
@@ -422,7 +422,7 @@ function formulaireOubliPassword($page){
 				<table>
 					<tr>
 						<td><label id="faMail">Email :</label></td>
-						<td><input class="adresse" type="text" name="mail"/></td>
+						<td><input type="text" name="mail"/></td>
 					</tr>
 					<tr>
 						<td><input type="hidden" name="verif" value="ok"/></td>
@@ -437,18 +437,21 @@ function formulaireOubliPassword($page){
 	else{
 		//inscription dans la base		
 		$pwd = wd_generatePassword();
-		//echo $pwd;
+		echo $pwd;
 		$req = "UPDATE kv_adherents SET pass='".md5($pwd)."' WHERE mail='".$_POST['mail']."'";
 		$query = mysql_query($req);
+		mysql_fetch_array($query);
 		echo '<div class="information">Mot de passe réinitialisé : vous allez recevoir un email avec ce nouveau mot de passe.</div>';
 		$subject = "Réinitialisation mot de passe AATT";
-		$mess = "Bonjour, \n\n\nVous trouverez dans cet email le nouveau mot de passe du compte associé à l'adresse : ".$_POST['mail']."\nMot de passe : ".$pwd."\n\nVous pouvez modifier ce mot de passe depuis le site, après vous être identifié.";
+		$mess = "Vous trouverez dans cette email le nouveau mot de passe du compte associé à l'adresse : ".$_POST['mail']."</br>Mot de passe : ".$pwd."</br>Vous pouvez modifier ce mot de passe depuis le site, après vous être identifié.";
 		mail($_POST['mail'], $subject, $mess);
 	}
 }
 
 function listeEquipe($param){	
 	echo "<select name='equipe' value='".$param."'> ";
+	$link = mysql_connect(MY_HOST,MY_USER,MY_PASS);
+	mysql_select_db(MY_BASE, $link);
 	$query = mysql_query('select * from kv_equipes ORDER BY nomEquipe');
 	echo "<option value='null' selected='selected'></option>\n";
 	while($dataEquipe = mysql_fetch_array($query)){

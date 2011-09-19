@@ -37,7 +37,7 @@ Template Name: Left Nav Secure
 				$_SESSION['connecte'] = 1;
 				$_SESSION['idAdherent'] = $data['idAdherent'];
 				$_SESSION['droits'] = $data['droits'];
-				print("Merci de vous vous être connecte ! Vous allez etre redirigé ...</br>");
+				echo "<div class=\"information\">Merci de vous vous être connecté ! Vous allez être redirigé ...</div>";
 				echo '<meta http-equiv="refresh" content="0;url=espace-adherent/" />';
 			}
 			else{

@@ -29,14 +29,14 @@ load_template(TEMPLATEPATH . '/functions/global/subnav-horizontal.php');}else{
 	if ($_SESSION['connecte'] == 1){
 	//	$_SESSION = array();
 			session_destroy();
-			echo "<div class=\"information\">Vous êtes dorénavant déconnecté, vous allez être redirigé vers la page d'accueil.</br>";
-			echo "Dans le cas contraire, <a href=\"";bloginfo('url');echo "/espace-adherent\">cliquez ici</a></div>";	
+			echo "Vous êtes dorénavant déconnecté, vous allez être redirigé vers la page d'accueil.</br>";
+			echo "Dans le cas contraire, <a href=\"espace-adherent/\">cliquez ici</a>";	
 	}
 	else{
 		echo "Vous n'êtes pas connecté";
 	}
 ?>	
-<meta http-equiv="refresh" content="0;url=<?php bloginfo('url');?>" />
+<meta http-equiv="refresh" content="0;url=" />
 </div><!-- end content -->
 </div><!-- end main-holder -->
 </div><!-- main-area -->

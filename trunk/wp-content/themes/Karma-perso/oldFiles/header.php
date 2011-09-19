@@ -1,7 +1,11 @@
 <?php
-	require_once("dataBaseConfig.php");
-
     session_start();
+    
+    define("MY_DBTYPE", "MySQL");
+	define("MY_HOST", "localhost");
+	define("MY_USER","aatt");
+	define("MY_PASS", "RSJzMbWywfJSnZfx");
+	define("MY_BASE", "wpKevin");	
     
     $link = mysql_connect(MY_HOST,MY_USER,MY_PASS);
 	mysql_select_db(MY_BASE, $link);
@@ -16,6 +20,7 @@
 <title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?></title>
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?>" href="<?php bloginfo('rss2_url'); ?>" />
+<base href="<?php bloginfo('url'); ?>/"/>
 <?php wp_head(); ?>
 <?php $logo = get_option('ka_sitelogo'); $toolbar = get_option('ka_toolbar'); ?>
 <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/lt8.css" media="screen"/><![endif]-->
@@ -66,7 +71,7 @@ if ($custom_logo_text == ''){
 		<a class="creerCompte ka_button small_button small_skyblue" href="creerCompte" style="opacity: 1;"><span>Créer un compte</span></a>
 		<a class="login ka_button small_button small_skyblue" href="javascript:void(0);" style="opacity: 1;"><span>Etes-vous adhérent ?</span></a>
 		<div id="login-popup">
-                    <form method="post" id="UserHomeForm" class="form account-form jqtransformdone" action="<?php bloginfo('url'); ?>/espace-adherent"><div style="display:none;"><input type="hidden" value="POST" name="_method"></div>                        <fieldset>
+                    <form method="post" id="UserHomeForm" class="form account-form jqtransformdone" action="espace-adherent/"><div style="display:none;"><input type="hidden" value="POST" name="_method"></div>                        <fieldset>
                             <div class="form-holder">
                                 <div class="form-section">
                                     <div class="row">
@@ -98,14 +103,14 @@ if ($custom_logo_text == ''){
 	}
 	else{
 ?>
-		<a class="logout ka_button small_button small_skyblue" href="logout" style="opacity: 1;"><span>Se déconnecter</span></a>
-		<a class="espace-adherent ka_button small_button small_skyblue" href="espace-adherent" style="opacity: 1;"><span>Espace adhérent</span></a>
+		<a class="logout ka_button small_button small_skyblue" href="/logout" style="opacity: 1;"><span>Se déconnecter</span></a>
+		<a class="espace-adherent ka_button small_button small_skyblue" href="/espace-adherent" style="opacity: 1;"><span>Espace adhérent</span></a>
 <?php	if ($_SESSION['droits'] == 1){	?>
-			<a class="espace-administration ka_button small_button small_skyblue" href="administration" style="opacity: 1;"><span>Administration</span></a>
+			<a class="espace-administration ka_button small_button small_skyblue" href="/administration" style="opacity: 1;"><span>Administration</span></a>
 <?php
 		}
 		else{?>
-			<a class="espace-profil ka_button small_button small_skyblue" href="espace-adherent/mon-profil" style="opacity: 1;"><span>Mon Profil</span></a>
+			<a class="espace-profil ka_button small_button small_skyblue" href="/espace-adherent/mon-profil" style="opacity: 1;"><span>Mon Profil</span></a>
 <?php	}
 	}
 ?>

@@ -1,0 +1,28 @@
+<?php 
+/* =================================== */
+// SIDEWAYS
+/* =================================== */
+function karma_sideways($atts, $content = null) {
+  extract(shortcode_atts(array(
+  'text' => '',
+  'rotate' => ''), $atts));
+  
+  $size = ($size == 'small') ? 'small_' : $size;
+  $size = ($size == 'medium') ? 'medium_' : $size;
+  $size = ($size == 'large') ? 'large_' : $size;
+  $target = ($target == '_blank' || $target == '_self' || $target == '_parent'|| $target == '_top') ? $target : '';
+  $target = ($target == '_blank') ? '_blank' : $target;
+  $target = ($target == '_self') ? '_self' : $target;
+  $target = ($target == '_parent') ? '_parent' : $target;
+  $target = ($target == '_top') ? '_top' : $target;
+  
+  $output = '
+  <aside>
+          <h3>'.$text.'</h3>
+          <p>' .do_shortcode($content).'</p>
+    </aside>';
+  return $output;
+}
+add_shortcode('sideways', 'karma_sideways');
+?>
+

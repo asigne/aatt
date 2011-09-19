@@ -6,6 +6,8 @@ define("MY_USER","aatt");
 define("MY_PASS", "RSJzMbWywfJSnZfx");
 define("MY_BASE", "wpKevin");
 
+$mavar ="aa";
+
 //technique
 /*
 define("DBTYPE", "MySQL"); //type de la base de données

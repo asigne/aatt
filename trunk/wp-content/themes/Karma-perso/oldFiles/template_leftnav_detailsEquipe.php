@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Left Nav ModifAdherent
+Template Name: Left Nav DetailsEquipe
 */
 ?>
 <?php get_header(); ?>
@@ -33,8 +33,9 @@ Template Name: Left Nav ModifAdherent
 	<?php } ?>		
 			<div id="content">
 			<?php 
-			$data = mysql_fetch_array(mysql_query("SELECT * FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and a.idAdherent=".$_GET['id']));	
-			formulaireModification(get_bloginfo('url')."/administration/gestion-des-adherents/modifier-un-adherent/", $data, 1);	?>
+			$query = mysql_query("SELECT e.idEquipe, nomEquipe, Count(*) FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and e.idEquipe=".$_GET['id']);
+			$data = mysql_fetch_array($query);
+			affichageDetailsEquipe($data);	?>
 			
 			</div><!-- end content -->
 <?php

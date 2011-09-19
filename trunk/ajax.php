@@ -1,12 +1,8 @@
 <?php 
+require_once('wp-content/themes/Karma-perso/dataBaseConfig.php');
+
 if($_GET['action'] == "supprAdherent"){
     session_start();
-    
-    define("MY_DBTYPE", "MySQL");
-	define("MY_HOST", "localhost");
-	define("MY_USER","aatt");
-	define("MY_PASS", "RSJzMbWywfJSnZfx");
-	define("MY_BASE", "wpKevin");	
     
     $link = mysql_connect(MY_HOST,MY_USER,MY_PASS);
 	mysql_select_db(MY_BASE, $link);
@@ -21,12 +17,6 @@ if ($_SESSION['connecte'] == 1){
 
 if($_GET['action'] == "supprEquipe"){
     session_start();
-    
-    define("MY_DBTYPE", "MySQL");
-	define("MY_HOST", "localhost");
-	define("MY_USER","aatt");
-	define("MY_PASS", "RSJzMbWywfJSnZfx");
-	define("MY_BASE", "wpKevin");	
     
     $link = mysql_connect(MY_HOST,MY_USER,MY_PASS);
 	mysql_select_db(MY_BASE, $link);
@@ -47,12 +37,6 @@ if($_GET['action'] == "supprEquipe"){
 
 if($_GET['action'] == "changerAccesAdherent"){
     session_start();
-    
-    define("MY_DBTYPE", "MySQL");
-	define("MY_HOST", "localhost");
-	define("MY_USER","aatt");
-	define("MY_PASS", "RSJzMbWywfJSnZfx");
-	define("MY_BASE", "wpKevin");	
     
     $link = mysql_connect(MY_HOST,MY_USER,MY_PASS);
 	mysql_select_db(MY_BASE, $link);
@@ -77,13 +61,7 @@ if($_GET['action'] == "changerAccesAdherent"){
 }
 
 if($_GET['action'] == "verifIDAdherent"){
-    session_start();
-    
-    define("MY_DBTYPE", "MySQL");
-	define("MY_HOST", "localhost");
-	define("MY_USER","aatt");
-	define("MY_PASS", "RSJzMbWywfJSnZfx");
-	define("MY_BASE", "wpKevin");	
+    session_start();	
     
     $link = mysql_connect(MY_HOST,MY_USER,MY_PASS);
 	mysql_select_db(MY_BASE, $link);
