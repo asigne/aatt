@@ -88,7 +88,7 @@ function validerFormAdherent(){
 	if(!erreur){
 		jQuery.ajax({
 			type: 'GET',
-		    url: 'http://localhost:8888/wordpressKevin/ajax.php',
+		    url: '/ajax.php',
 		    data: "action=verifIDAdherent&mail="+document.formAdherent.mail.value,
 		    dataType:'text',
 		    success: function(text){
@@ -196,7 +196,7 @@ function supprimerAdherent(idAdherent, nomAdherent, prenomAdherent){
 
 			type: 'GET',
 
-		    url: 'http://localhost:8888/wordpressKevin/ajax.php',
+		    url: '/ajax.php',
 
 		    data: "action=supprAdherent&id="+idAdherent,
 
@@ -236,7 +236,7 @@ function supprimerEquipe(idEquipe, nomEquipe){
 
 			type: 'GET',
 
-		    url: 'http://localhost:8888/wordpressKevin/ajax.php',
+		    url: '/ajax.php',
 
 		    data: "action=supprEquipe&id="+idEquipe,
 
@@ -261,7 +261,7 @@ function modifAccesAdherent(idAdherent, nomAdherent, prenomAdherent, acces){
 	if (r==true){
 		jQuery.ajax({
 			type: 'GET',
-			url: 'http://localhost:8888/wordpressKevin/ajax.php',
+			url: '/ajax.php',
 			data: "action=changerAccesAdherent&idAdherent="+idAdherent+"&acces="+acces,
 			dataType:'text',
 			success: function(text){if(text=='erreur'){alert("Impossible de modifier les droits de cet adhérent !")}else{window.location.reload()}},

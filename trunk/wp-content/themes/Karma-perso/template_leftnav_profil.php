@@ -38,7 +38,7 @@ Template Name: Left Nav Profil
 				$_SESSION['idAdherent'] = $data['idAdherent'];
 				$_SESSION['droits'] = $data['droits'];
 				print("Merci de vous vous être connecte ! Vous allez etre redirigé ...</br>");
-				echo '<meta http-equiv="refresh" content="0;url=http://localhost:8888/wordpressKevin/espace-adherent/" />';
+				echo '<meta http-equiv="refresh" content="0;url=espace-adherent/" />';
 			}
 			else{
 				echo '<div class="erreur">
@@ -82,7 +82,7 @@ Template Name: Left Nav Profil
 			$query = mysql_query("SELECT * FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and a.idAdherent=".$_SESSION['idAdherent']);
 			$data = mysql_fetch_array($query);
 			
-			formulaireModification("http://localhost:8888/wordpressKevin/espace-adherent/mon-profil/", $data, 0);	?>
+			formulaireModification("espace-adherent/mon-profil/", $data, 0);	?>
 			
 		</div><!-- end content -->
 <?php

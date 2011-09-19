@@ -31,7 +31,7 @@ load_template(TEMPLATEPATH . '/functions/global/subnav-horizontal.php');}else{
 <?php
 	if ($_SESSION['connecte'] == 0){
 ?>
-		<form action="http://localhost:8888/wordpressKevin/espace-adherent/" method="post">
+		<form action="espace-adherent/" method="post">
 			<table>
 				<tr>
 					<td><label>Identifiant :</label></td>

@@ -34,7 +34,7 @@ Template Name: Left Nav gestionEquipes
 			<div id="content">
 <?php //if(have_posts()) : while(have_posts()) : the_post(); the_content(); endwhile; endif;
 			//$query = mysql_query("SELECT e.idEquipe, nomEquipe, Count(*) FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe GROUP BY e.idEquipe ");
-			$query = mysql_query("SELECT idEquipe, nomEquipe FROM kv_equipes");
+			$query = mysql_query("SELECT  FROM kv_equipes");
 ?>			
 			<table id="tabAdherent">
 				<tr>
@@ -49,8 +49,8 @@ Template Name: Left Nav gestionEquipes
 					echo '<tr>';
 					echo '<td>'.$data['1'].'</td>';
 					//echo '<td>'.$data['2'].'</td>';
-					echo '<td><a href="http://localhost:8888/wordpressKevin/administration/details-equipe/?id='.$data['0'].'"><div class="details"></div></a></td>';
-					echo '<td><a href="http://localhost:8888/wordpressKevin/administration/modifier-une-equipe/?id='.$data['0'].'"><div class="modif"></div></a></td>';
+					echo '<td><a href="administration/details-equipe/?id='.$data['0'].'"><div class="details"></div></a></td>';
+					echo '<td><a href="administration/modifier-une-equipe/?id='.$data['0'].'"><div class="modif"></div></a></td>';
 					echo '<td><a href="javascript:supprimerEquipe('.$data['0'].', \''.$data['1'].'\')"><div class="delete"></div></a></td>';
 					echo '</tr>';
 				}

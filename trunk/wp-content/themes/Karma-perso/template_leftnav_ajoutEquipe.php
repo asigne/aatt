@@ -33,7 +33,7 @@ Template Name: Left Nav AjoutEquipe
 	<?php } ?>		
 			<div id="content">
 			
-			<?php formulaireAjoutEquipe("http://localhost:8888/wordpressKevin/administration/gestion-des-equipes/ajouter-une-equipe/");	?>
+			<?php formulaireAjoutEquipe("/administration/gestion-des-equipes/ajouter-une-equipe/");	?>
 			
 			</div><!-- end content -->
 <?php

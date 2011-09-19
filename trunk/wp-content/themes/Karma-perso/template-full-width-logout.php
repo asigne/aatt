@@ -30,13 +30,13 @@ load_template(TEMPLATEPATH . '/functions/global/subnav-horizontal.php');}else{
 	//	$_SESSION = array();
 			session_destroy();
 			echo "Vous êtes dorénavant déconnecté, vous allez être redirigé vers la page d'accueil.</br>";
-			echo "Dans le cas contraire, <a href=\"http://localhost:8888/wordpressKevin/espace-adherent/\">cliquez ici</a>";	
+			echo "Dans le cas contraire, <a href=\"espace-adherent/\">cliquez ici</a>";	
 	}
 	else{
 		echo "Vous n'êtes pas connecté";
 	}
 ?>	
-<meta http-equiv="refresh" content="0;url=http://localhost:8888/wordpressKevin/" />
+<meta http-equiv="refresh" content="0;url=" />
 </div><!-- end content -->
 </div><!-- end main-holder -->
 </div><!-- main-area -->
