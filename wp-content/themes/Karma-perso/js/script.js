@@ -111,7 +111,7 @@ function validerFormAdherent(){
 	return false;
 }
 
-function validerFormAdherentModif(mail){
+function validerFormAdherentModif(mode){
 	var erreur = false;
 	
 	if(document.formAdherent.nom.value != ""){
@@ -128,22 +128,6 @@ function validerFormAdherentModif(mail){
 	else{
 		jQuery('#faPrenom').attr('id','faPrenomE');
 		erreur = true;		
-	}
-	
-	if(validateEmail(document.formAdherent.mail.value)){
-		jQuery('#faMailE').attr('id','faMail');
-	}
-	else{
-		jQuery('#faMail').attr('id','faMailE');
-		erreur = true;
-	}
-	
-	if(validateEmail(document.formAdherent.mail.value)){
-		jQuery('#faMailE').attr('id','faMail');
-	}
-	else{
-		jQuery('#faMail').attr('id','faMailE');
-		erreur = true;
 	}
 	
 	if(document.formAdherent.equipe.value != "null"){
@@ -186,20 +170,15 @@ function validerFormAdherentModif(mail){
 		jQuery('#faFixeE').attr('id','faFixe');		
 	}
 	
-	if(document.formAdherent.pass.value != ""){
-		jQuery('#faAccesE').attr('id','faAcces');
+	if(!mode){
+		if(document.formAdherent.pass.value != ""){
+			jQuery('#faPassE').attr('id','fapass');
+		}
+		else{
+			jQuery('#faPass').attr('id','faPassE');
+			erreur = true;
+		}	
 	}
-	else{
-		jQuery('#faAcces').attr('id','faAccesE');
-		erreur = true;
-	}
-	if(document.formAdherent.pass.value != ""){
-		jQuery('#faPassE').attr('id','fapass');
-	}
-	else{
-		jQuery('#faPass').attr('id','faPassE');
-		erreur = true;
-	}	
 	if(!erreur){
 		document.formAdherent.submit();
 		return true;

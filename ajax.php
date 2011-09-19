@@ -96,9 +96,4 @@ if($_GET['action'] == "verifIDAdherent"){
 		echo "possible";
 	}
 }
-
-
-if($_GET['action'] == "aaa"){
-	echo "aaa";
-}
 ?>

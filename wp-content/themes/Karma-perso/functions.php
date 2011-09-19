@@ -1,10 +1,17 @@
 <?php
 require_once('functionPostResultat.php');
+require_once('functionPostPhotosVideos.php');
 
 function formulaireInscription($page, $mode){
 	if($_POST['verif'] != "ok"){
 		echo '<form id="formAdherent" name="formAdherent" action='.$page.' method="post">
 				<table>
+					<tr>
+						<td><label id="faNom">Civilité :</label></td>
+						<td>';
+							listeCivilite("");
+		echo '			</td>
+					</tr>
 					<tr>
 						<td><label id="faNom">Nom :</label></td>
 						<td><input type="text" name="nom"/></td>
@@ -20,7 +27,7 @@ function formulaireInscription($page, $mode){
 					<tr>
 						<td><label id="faEquipe">Equipe :</label></td>
 						<td>';
-					listeEquipe();
+							listeEquipe();
 		echo		'</td>
 					</tr>
 					<tr >
@@ -50,9 +57,9 @@ function formulaireInscription($page, $mode){
 					</tr>
 					<tr>
 						<td><label id="faAcces">Accès :</label></td>
-						<td><input type="text" name="acces"/></td>
-						<td><label>0->Non, 1->Oui</label></td>
-					</tr>';	
+						<td>';
+						selectOuiNon("acces", false);
+					echo'</td></tr>';	
 				}
 				echo'<tr>
 					<tr>
@@ -72,10 +79,10 @@ function formulaireInscription($page, $mode){
 	else{
 		//inscription dans la base		
 		if($mode){
-			$req = "INSERT INTO kv_adherents VALUES ('','".$_POST['mail']."','".md5($_POST['pass'])."','".strtoupper($_POST['nom'])."','".ucfirst($_POST['prenom'])."','".$_POST['adresse']."','".$_POST['codePostal']."','".strtoupper($_POST['ville'])."','".$_POST['fixe']."','".$_POST['portable']."','".$_POST['classement']."','0', '".$_POST['acces']."','".$_POST['equipe']."')";
+			$req = "INSERT INTO kv_adherents VALUES ('','".$_POST['mail']."','".md5($_POST['pass'])."','".strtoupper($_POST['nom'])."','".ucfirst($_POST['prenom'])."','".$_POST['adresse']."','".$_POST['codePostal']."','".strtoupper($_POST['ville'])."','".$_POST['fixe']."','".$_POST['portable']."','".$_POST['classement']."','0', '".$_POST['acces']."','".$_POST['equipe']."','".$_POST['civilite']."')";
 		}
 		else{
-			$req = "INSERT INTO kv_adherents VALUES ('','".$_POST['mail']."','".md5($_POST['pass'])."','".strtoupper($_POST['nom'])."','".ucfirst($_POST['prenom'])."','".$_POST['adresse']."','".$_POST['codePostal']."','".strtoupper($_POST['ville'])."','".$_POST['fixe']."','".$_POST['portable']."','','0', '0','".$_POST['equipe']."')";
+			$req = "INSERT INTO kv_adherents VALUES ('','".$_POST['mail']."','".md5($_POST['pass'])."','".strtoupper($_POST['nom'])."','".ucfirst($_POST['prenom'])."','".$_POST['adresse']."','".$_POST['codePostal']."','".strtoupper($_POST['ville'])."','".$_POST['fixe']."','".$_POST['portable']."','','0', '0','".$_POST['equipe']."','".$_POST['civilite']."')";
 		}
 		$query = mysql_query($req);
 		mysql_fetch_array($query);
@@ -93,6 +100,12 @@ function formulaireModification($page, $data, $mode){
 		echo '<form id="formAdherent" name="formAdherent" action='.$page.' method="post">
 				<table>
 					<tr>
+						<td><label id="faNom">Civilité :</label></td>
+						<td>';
+							listeCivilite($data[14]);
+		echo '			</td>
+					</tr>
+					<tr>
 						<td><label id="faNom">Nom :</label></td>
 						<td><input type="text" name="nom" value="'.$data[3].'"/></td>
 					</tr>
@@ -102,7 +115,7 @@ function formulaireModification($page, $data, $mode){
 					</tr>
 					<tr>
 						<td><label id="faMail">Mail :</label></td>
-						<td><input class="adresse" type="text" name="mail"  value="'.$data[1].'"/></td>
+						<td><input class="adresse" disabled="disabled" type="text" name="mail"  value="'.$data[1].'"/></td>
 					</tr>
 					<tr>
 						<td><label id="faEquipe">Equipe :</label></td>
@@ -137,9 +150,9 @@ function formulaireModification($page, $data, $mode){
 					</tr>
 					<tr>
 						<td><label id="faAcces">Accès :</label></td>
-						<td><input type="text" name="acces"  value="'.$data[12].'"/></td>
-						<td><label>0->Non, 1->Oui</label></td>
-					</tr>';	
+						<td>';
+						selectOuiNon("acces", $data[12]);
+					echo'</td></tr>';	
 				}
 				echo'<tr>
 						<td><label id="faPass">Mot de passe :</label>
@@ -151,7 +164,7 @@ function formulaireModification($page, $data, $mode){
 					</tr>
 					<tr>
 						<td></td>
-						<td><input id="faValider" type="submit" value="Valider" onclick="return validerFormAdherent()" /></td>
+						<td><input id="faValider" type="submit" value="Valider" onclick="return validerFormAdherentModif('.$mode.')" /></td>
 					</tr>
 				</table>	
 			</form>';
@@ -159,10 +172,20 @@ function formulaireModification($page, $data, $mode){
 	else{
 		//modification dans la base	
 		if($mode){
-			$req = "UPDATE kv_adherents SET pass='".md5($_POST['pass'])."', mail='".$_POST['mail']."', nom='".strtoupper($_POST['nom'])."', prenom='".ucfirst($_POST['prenom'])."', adresse='".$_POST['adresse']."', codepostal='".$_POST['codePostal']."', ville='".strtoupper($_POST['ville'])."', teldomicile='".$_POST['fixe']."', telportable='".$_POST['portable']."', classement='".$_POST['classement']."', acces='".$_POST['acces']."', idEquipe='".$_POST['equipe']."' WHERE idAdherent='".$_POST['idAdherent']."'";
+			if($_POST['pass']==""){
+				$req = "UPDATE kv_adherents SET civilite='".$_POST['civilite']."', nom='".strtoupper($_POST['nom'])."', prenom='".ucfirst($_POST['prenom'])."', adresse='".$_POST['adresse']."', codepostal='".$_POST['codePostal']."', ville='".strtoupper($_POST['ville'])."', teldomicile='".$_POST['fixe']."', telportable='".$_POST['portable']."', classement='".$_POST['classement']."', acces='".$_POST['acces']."', idEquipe='".$_POST['equipe']."' WHERE idAdherent='".$_POST['idAdherent']."'";
+			}
+			else{
+				$req = "UPDATE kv_adherents SET civilite='".$_POST['civilite']."', pass='".md5($_POST['pass'])."', nom='".strtoupper($_POST['nom'])."', prenom='".ucfirst($_POST['prenom'])."', adresse='".$_POST['adresse']."', codepostal='".$_POST['codePostal']."', ville='".strtoupper($_POST['ville'])."', teldomicile='".$_POST['fixe']."', telportable='".$_POST['portable']."', classement='".$_POST['classement']."', acces='".$_POST['acces']."', idEquipe='".$_POST['equipe']."' WHERE idAdherent='".$_POST['idAdherent']."'";
+			}
 		}
 		else{
-			$req = "UPDATE kv_adherents SET pass='".md5($_POST['pass'])."', mail='".$_POST['mail']."', nom='".strtoupper($_POST['nom'])."', prenom='".ucfirst($_POST['prenom'])."', adresse='".$_POST['adresse']."', codepostal='".$_POST['codePostal']."', ville='".strtoupper($_POST['ville'])."', teldomicile='".$_POST['fixe']."', telportable='".$_POST['portable']."', idEquipe='".$_POST['equipe']."' WHERE idAdherent='".$_POST['idAdherent']."'";
+			if($_POST['pass']==""){
+				$req = "UPDATE kv_adherents SET civilite='".$_POST['civilite']."', nom='".strtoupper($_POST['nom'])."', prenom='".ucfirst($_POST['prenom'])."', adresse='".$_POST['adresse']."', codepostal='".$_POST['codePostal']."', ville='".strtoupper($_POST['ville'])."', teldomicile='".$_POST['fixe']."', telportable='".$_POST['portable']."', idEquipe='".$_POST['equipe']."' WHERE idAdherent='".$_POST['idAdherent']."'";
+			}
+			else{
+				$req = "UPDATE kv_adherents SET civilite='".$_POST['civilite']."', pass='".md5($_POST['pass'])."', nom='".strtoupper($_POST['nom'])."', prenom='".ucfirst($_POST['prenom'])."', adresse='".$_POST['adresse']."', codepostal='".$_POST['codePostal']."', ville='".strtoupper($_POST['ville'])."', teldomicile='".$_POST['fixe']."', telportable='".$_POST['portable']."', idEquipe='".$_POST['equipe']."' WHERE idAdherent='".$_POST['idAdherent']."'";			
+			}
 		}
 		$query = mysql_query($req);
 		echo '<div class="information">Modification effectuée</div>';
@@ -232,6 +255,7 @@ function formulaireModificationEquipe($page, $data){
 function affichageAdherent($query){
 	echo'<table id="tabAdherent">
 		<tr>
+			<th>Civilité</th>
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>Mail</th>
@@ -248,6 +272,7 @@ function affichageAdherent($query){
 		</tr>';
 		while ($data = mysql_fetch_array($query)){
 			echo '<tr>';
+			echo '<td>'.$data['7'].'</td>';			
 			echo '<td>'.$data['1'].'</td>';
 			echo '<td>'.$data['2'].'</td>';
 			echo '<td><a href="mailto:'.$data['3'].'">'.$data['3'].'</a></td>';
@@ -319,10 +344,14 @@ function affichageDetailsAdherent($data){
 						<td><label>'.$data[10].'</label></td>
 					</tr>
 					<tr>
-						<td><label>Accès :</label></td>
-						<td><label>'.$data[12].'</label></td>
-						<td><label>0->Non, 1->Oui</label></td>
-					</tr>
+						<td><label>Accès :</label></td>';
+						if($data[12]){
+							echo '<td><label>Oui</label></td>';
+						}
+						else{
+							echo '<td><label>Non</label></td>';						
+						}
+				echo'</tr>
 					<tr>
 						<td><input type="hidden" name="idAdherent" value="'.$data[0].'"/></td>
 					</tr>
@@ -343,6 +372,47 @@ function affichageDetailsEquipe($data){
 						<td><input type="hidden" name="idAdherent" value="'.$data[0].'"/></td>
 					</tr>
 				</table>';
+	
+	
+	/*echo'<table id="tabAdherent">
+		<tr>
+			<th>Civilité</th>
+			<th>Nom</th>
+			<th>Prénom</th>
+			<th>Mail</th>
+			<th>Equipe</th>
+			<th>Portable</th>
+			<th>Accès</th>
+			<th>D</th>
+			<th>M</th>
+			<th>S</th>
+		</tr>';
+		$query1 = mysql_query("SELECT * FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and e.idEquipe=".$data[0]);
+		while ($data1 = mysql_fetch_array($query1)){
+			echo '<tr>';
+			echo '<td>'.$data1['14'].'</td>';			
+			echo '<td>'.$data1['3'].'</td>';
+			echo '<td>'.$data1['4'].'</td>';
+			echo '<td><a href="mailto:'.$data1['1'].'">'.$data1['1'].'</a></td>';
+			echo '<td>'.$data1['13'].'</td>';
+			echo '<td>'.$data1['12'].'</td>';
+			echo '<td><a href="javascript:modifAccesAdherent('.$data1['0'].', \''.$data1['1'].'\',\''.$data1['2'].'\','.$data1['11'].')">';
+			if($data1['11']){
+							echo '<div id="accesOuvert"></div>';
+						}
+						else{
+							echo '<div id="accesFerme"></div>';
+						}
+			echo '</a></td>';
+			echo '<td><a href="http://localhost:8888/wordpressKevin/administration/details-adherent/?id='.$data1['0'].'"><div class="details"></div></a></td>';
+			echo '<td><a href="http://localhost:8888/wordpressKevin/administration/modifier-un-adherent/?id='.$data1['0'].'"><div class="modif"></div></a></td>';
+			echo '<td><a href="javascript:supprimerAdherent('.$data1['0'].', \''.$data1['1'].'\',\''.$data1['2'].'\')"><div class="delete"></div></a></td>';
+			echo '</tr>';
+		}
+	echo '</table>';*/
+	$query = mysql_query("SELECT a.idAdherent, a.nom, a.prenom, a.mail, a.telportable, a.acces, e.nomEquipe, a.civilite FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and e.idEquipe=".$data[0]);
+	affichageAdherent($query);
+				
 }
 
 function formulaireOubliPassword($page){
@@ -431,4 +501,47 @@ function wd_generatePassword($length=8, $possible='$=@#23456789bcdfghjkmnpqrstvw
     return $password;
 }
 
+function selectOuiNon($attribut, $param){
+    if($param)
+	    {
+		    echo "
+			    <input type=\"radio\" name=\"".$attribut."\" value=\"1\" checked='checked' /><label>Oui</label>
+			    <input type=\"radio\" name=\"".$attribut."\" value=\"0\" /><label>Non</label>";
+	    }
+    else
+	    {
+		    echo "
+			    <input type=\"radio\" name=\"".$attribut."\" value=\"1\"  /><label>Oui</label>
+			    <input type=\"radio\" name=\"".$attribut."\" value=\"0\" checked='checked' /><label>Non</label>";
+	    }
+}
+
+function listeCivilite($param) {
+	echo '<select name="civilite" value="'.$param.'">';
+		if($param == ""){
+			echo'<option value="null" selected="selected"></option>
+				<option value="Mme">Madame</option>
+				<option value="Mlle">Mademoiselle</option>		
+				<option value="Mr">Monsieur</option>';
+		}
+		else if($param == "Mme"){
+			echo'<option value="null"></option>
+				<option value="Mme" selected="selected">Madame</option>
+				<option value="Mlle">Mademoiselle</option>		
+				<option value="Mr">Monsieur</option>';
+		}
+		else if($param == "Mlle"){
+			echo'<option value="null" ></option>
+				<option value="Mme">Madame</option>
+				<option value="Mlle" selected="selected">Mademoiselle</option>		
+				<option value="Mr">Monsieur</option>';
+		}
+		else if($param == "Mr"){
+			echo'<option value="null" ></option>
+				<option value="Mme">Madame</option>
+				<option value="Mlle">Mademoiselle</option>		
+				<option value="Mr" selected="selected">Monsieur</option>';
+		}
+	echo'</select>';
+}
 ?>
