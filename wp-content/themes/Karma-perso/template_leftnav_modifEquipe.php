@@ -35,7 +35,7 @@ Template Name: Left Nav ModifEquipe
 			<?php 
 			$query = mysql_query("SELECT * FROM kv_equipes where idEquipe=".$_GET['id']);
 			$data = mysql_fetch_array($query);
-			formulaireModificationEquipe("http://localhost:8888/wordpressKevin/administration/gestion-des-equipes/modifier-une-equipe/", $data);	?>
+			formulaireModificationEquipe("administration/gestion-des-equipes/modifier-une-equipe/", $data);	?>
 			
 			</div><!-- end content -->
 <?php

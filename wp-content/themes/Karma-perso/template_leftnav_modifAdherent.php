@@ -34,9 +34,9 @@ Template Name: Left Nav ModifAdherent
 			<div id="content">
 			<?php 
 			$query = mysql_query("SELECT * FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and a.idAdherent=".$_GET['id']);
-			$data = mysql_fetch_array($query);
 			
-			formulaireModification("http://localhost:8888/wordpressKevin/administration/gestion-des-adherents/modifier-un-adherent/", $data, 1);	?>
+			
+			formulaireModification("administration/gestion-des-adherents/modifier-un-adherent/", $data, 1);	?>
 			
 			</div><!-- end content -->
 <?php

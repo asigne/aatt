@@ -10,7 +10,7 @@
     $link = mysql_connect(MY_HOST,MY_USER,MY_PASS);
 	mysql_select_db(MY_BASE, $link);
 	
-	wp_enqueue_script("pop","http://localhost:8888/wordpressKevin/wp-content/themes/Karma-perso/js/script.js");
+	wp_enqueue_script("pop","/wp-content/themes/Karma-perso/js/script.js");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
@@ -20,6 +20,7 @@
 <title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?></title>
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?>" href="<?php bloginfo('rss2_url'); ?>" />
+<base href="<?php bloginfo('url'); ?>/"/>
 <?php wp_head(); ?>
 <?php $logo = get_option('ka_sitelogo'); $toolbar = get_option('ka_toolbar'); ?>
 <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/lt8.css" media="screen"/><![endif]-->
@@ -28,7 +29,7 @@ if (is_page_template('template-homepage-3D.php')) {
 echo '<!--[if IE 9]><style stype="text/css">.big-banner #main .flash-main-area .content_full_width {margin-top:105px;clear:both;}</style><![endif]-->';
 }
 ?>
-<!--<script src="http://localhost:8888/wordpressKevin/wp-content/themes/Karma-perso/js/script.js" type="text/javascript">-->
+<!--<script src="/wp-content/themes/Karma-perso/js/script.js" type="text/javascript">-->
 </head>
 <body <?php body_class(); ?>>
 <div id="wrapper" <?php if (is_page_template('template-homepage-3D.php') || is_page_template('template-homepage-jquery-2.php')) {echo 'class="big-banner"';} ?>>
@@ -67,10 +68,10 @@ if ($custom_logo_text == ''){
 <?php
 	if ($_SESSION['connecte'] == 0){
 ?>
-		<a class="creerCompte ka_button small_button small_skyblue" href="http://localhost:8888/wordpressKevin/creerCompte" style="opacity: 1;"><span>Créer un compte</span></a>
+		<a class="creerCompte ka_button small_button small_skyblue" href="creerCompte" style="opacity: 1;"><span>Créer un compte</span></a>
 		<a class="login ka_button small_button small_skyblue" href="javascript:void(0);" style="opacity: 1;"><span>Etes-vous adhérent ?</span></a>
 		<div id="login-popup">
-                    <form method="post" id="UserHomeForm" class="form account-form jqtransformdone" action="http://localhost:8888/wordpressKevin/espace-adherent/"><div style="display:none;"><input type="hidden" value="POST" name="_method"></div>                        <fieldset>
+                    <form method="post" id="UserHomeForm" class="form account-form jqtransformdone" action="espace-adherent/"><div style="display:none;"><input type="hidden" value="POST" name="_method"></div>                        <fieldset>
                             <div class="form-holder">
                                 <div class="form-section">
                                     <div class="row">
@@ -89,7 +90,7 @@ if ($custom_logo_text == ''){
                                 </div>
                                 <div class="row">
                                     <div class="align-center">
-                                        <a href="/wordpressKevin/mot-de-passe-oublie">Mot de passe oublié ?</a>                                    </div>
+                                        <a href="mot-de-passe-oublie">Mot de passe oublié ?</a>                                    </div>
                                 </div>
                                 <div class="submit"><input type="submit" value="Se connecter" id="LoginButton" class="account-submit"></div>
                             </div>
@@ -102,14 +103,14 @@ if ($custom_logo_text == ''){
 	}
 	else{
 ?>
-		<a class="logout ka_button small_button small_skyblue" href="http://localhost:8888/wordpressKevin/logout" style="opacity: 1;"><span>Se déconnecter</span></a>
-		<a class="espace-adherent ka_button small_button small_skyblue" href="http://localhost:8888/wordpressKevin/espace-adherent" style="opacity: 1;"><span>Espace adhérent</span></a>
+		<a class="logout ka_button small_button small_skyblue" href="/logout" style="opacity: 1;"><span>Se déconnecter</span></a>
+		<a class="espace-adherent ka_button small_button small_skyblue" href="/espace-adherent" style="opacity: 1;"><span>Espace adhérent</span></a>
 <?php	if ($_SESSION['droits'] == 1){	?>
-			<a class="espace-administration ka_button small_button small_skyblue" href="http://localhost:8888/wordpressKevin/administration" style="opacity: 1;"><span>Administration</span></a>
+			<a class="espace-administration ka_button small_button small_skyblue" href="/administration" style="opacity: 1;"><span>Administration</span></a>
 <?php
 		}
 		else{?>
-			<a class="espace-profil ka_button small_button small_skyblue" href="http://localhost:8888/wordpressKevin/espace-adherent/mon-profil" style="opacity: 1;"><span>Mon Profil</span></a>
+			<a class="espace-profil ka_button small_button small_skyblue" href="/espace-adherent/mon-profil" style="opacity: 1;"><span>Mon Profil</span></a>
 <?php	}
 	}
 ?>

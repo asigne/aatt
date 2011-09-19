@@ -87,7 +87,7 @@ function formulaireInscription($page, $mode){
 		$query = mysql_query($req);
 		mysql_fetch_array($query);
 		if($mode){
-			echo '<meta http-equiv="refresh" content="0;url=http://localhost:8888/wordpressKevin/administration/gestion-des-adherents/" />';
+			echo '<meta http-equiv="refresh" content="0;url=/administration/gestion-des-adherents/" />';
 		}
 		else{
 			echo '<div class="information">Votre compte a été crée avec succès, vous recevrez un email dès que l\'administrateur aura validé votre inscription !</div>';
@@ -190,7 +190,7 @@ function formulaireModification($page, $data, $mode){
 		$query = mysql_query($req);
 		echo '<div class="information">Modification effectuée</div>';
 		if($mode){
-			echo '<meta http-equiv="refresh" content="0;url=http://localhost:8888/wordpressKevin/administration/gestion-des-adherents/" />';
+			echo '<meta http-equiv="refresh" content="0;url=/administration/gestion-des-adherents/" />';
 		}
 	}
 }
@@ -220,7 +220,7 @@ function formulaireAjoutEquipe($page){
 		$query = mysql_query($req);
 		mysql_fetch_array($query);
 		echo "Equipe ajoutée avec succès";
-		echo '<meta http-equiv="refresh" content="0;url=http://localhost:8888/wordpressKevin/administration/gestion-des-equipes/" />';
+		echo '<meta http-equiv="refresh" content="0;url=/administration/gestion-des-equipes/" />';
 	}
 }
 
@@ -248,7 +248,7 @@ function formulaireModificationEquipe($page, $data){
 		$req = "UPDATE kv_equipes SET nomEquipe='".strtoupper($_POST['nom'])."' WHERE idEquipe='".$_POST['idEquipe']."'";
 		$query = mysql_query($req);
 		echo "Modification effectuée";
-		echo '<meta http-equiv="refresh" content="0;url=http://localhost:8888/wordpressKevin/administration/gestion-des-equipes/" />';
+		echo '<meta http-equiv="refresh" content="0;url=/administration/gestion-des-equipes/" />';
 	}
 }
 
@@ -293,8 +293,8 @@ function affichageAdherent($query){
 			echo '</a></td>';
 			
 	//					$param="id=".$data['0']."&mail=".$data['1']."&nom".$data['3']."&prenom=".$data['4']."&adresse=".$data['5']."&codepostal=".$data['6']."&ville=".$data['7']."&fixe=".$data['8']."&portable=".$data['9']."&classement=".$data['10']."&acces=".$data['12']."&equipe=".$data['13'];
-			echo '<td><a href="http://localhost:8888/wordpressKevin/administration/details-adherent/?id='.$data['0'].'"><div class="details"></div></a></td>';
-			echo '<td><a href="http://localhost:8888/wordpressKevin/administration/modifier-un-adherent/?id='.$data['0'].'"><div class="modif"></div></a></td>';
+			echo '<td><a href="/administration/details-adherent/?id='.$data['0'].'"><div class="details"></div></a></td>';
+			echo '<td><a href="/administration/modifier-un-adherent/?id='.$data['0'].'"><div class="modif"></div></a></td>';
 			echo '<td><a href="javascript:supprimerAdherent('.$data['0'].', \''.$data['1'].'\',\''.$data['2'].'\')"><div class="delete"></div></a></td>';
 			echo '</tr>';
 		}
@@ -404,8 +404,8 @@ function affichageDetailsEquipe($data){
 							echo '<div id="accesFerme"></div>';
 						}
 			echo '</a></td>';
-			echo '<td><a href="http://localhost:8888/wordpressKevin/administration/details-adherent/?id='.$data1['0'].'"><div class="details"></div></a></td>';
-			echo '<td><a href="http://localhost:8888/wordpressKevin/administration/modifier-un-adherent/?id='.$data1['0'].'"><div class="modif"></div></a></td>';
+			echo '<td><a href="/administration/details-adherent/?id='.$data1['0'].'"><div class="details"></div></a></td>';
+			echo '<td><a href="/administration/modifier-un-adherent/?id='.$data1['0'].'"><div class="modif"></div></a></td>';
 			echo '<td><a href="javascript:supprimerAdherent('.$data1['0'].', \''.$data1['1'].'\',\''.$data1['2'].'\')"><div class="delete"></div></a></td>';
 			echo '</tr>';
 		}

@@ -33,7 +33,7 @@ Template Name: Left Nav AjoutAdherent
 	<?php } ?>		
 			<div id="content">
 			
-			<?php formulaireInscription("http://localhost:8888/wordpressKevin/administration/gestion-des-adherents/ajouter-un-adherent/", 1);	?>
+			<?php formulaireInscription("/administration/gestion-des-adherents/ajouter-un-adherent/", 1);	?>
 			
 			</div><!-- end content -->
 <?php
