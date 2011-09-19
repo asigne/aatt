@@ -82,7 +82,7 @@ Template Name: Left Nav Profil
 			$query = mysql_query("SELECT * FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and a.idAdherent=".$_SESSION['idAdherent']);
 			$data = mysql_fetch_array($query);
 			
-			formulaireModification(get_bloginfo('url')."/espace-adherent/mon-profil", $data, 0);	?>
+			formulaireModification("espace-adherent/mon-profil/", $data, 0);	?>
 			
 		</div><!-- end content -->
 <?php

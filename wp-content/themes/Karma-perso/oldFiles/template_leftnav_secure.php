@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Left Nav Profil
+Template Name: Left Nav Secure
 */
 ?>
 <?php get_header(); ?>
@@ -78,12 +78,8 @@ Template Name: Left Nav Profil
 		</div><!-- end sub_nav -->
 <?php } ?>		
 		<div id="content">
-			<?php 
-			$query = mysql_query("SELECT * FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and a.idAdherent=".$_SESSION['idAdherent']);
-			$data = mysql_fetch_array($query);
-			
-			formulaireModification(get_bloginfo('url')."/espace-adherent/mon-profil", $data, 0);	?>
-			
+
+		<?php if(have_posts()) : while(have_posts()) : the_post(); the_content(); endwhile; endif; ?>
 		</div><!-- end content -->
 <?php
 	}

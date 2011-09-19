@@ -1,7 +1,10 @@
 <?php
 /*
-Template Name: Full Width Logout
+Template Name: Full Width creerCompte
 */
+?>
+<?php
+  //   session_start();
 ?>
 <?php get_header(); ?>
 </div><!-- header-area -->
@@ -26,17 +29,14 @@ load_template(TEMPLATEPATH . '/functions/global/subnav-horizontal.php');}else{
 <div id="content" class="content_full_width">
 
 <?php
-	if ($_SESSION['connecte'] == 1){
-	//	$_SESSION = array();
-			session_destroy();
-			echo "<div class=\"information\">Vous êtes dorénavant déconnecté, vous allez être redirigé vers la page d'accueil.</br>";
-			echo "Dans le cas contraire, <a href=\"";bloginfo('url');echo "/espace-adherent\">cliquez ici</a></div>";	
+	if ($_SESSION['connecte'] == 0){
+		formulaireInscription("http://localhost:8888/wordpressKevin/creerCompte/", 0);
 	}
 	else{
-		echo "Vous n'êtes pas connecté";
+		echo "Vous avez déjà un compte adhérent !";
 	}
 ?>	
-<meta http-equiv="refresh" content="0;url=<?php bloginfo('url');?>" />
+
 </div><!-- end content -->
 </div><!-- end main-holder -->
 </div><!-- main-area -->

@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Full Width Logout
+Template Name: Full Width Oubli Mot de passe
 */
 ?>
 <?php get_header(); ?>
@@ -26,17 +26,8 @@ load_template(TEMPLATEPATH . '/functions/global/subnav-horizontal.php');}else{
 <div id="content" class="content_full_width">
 
 <?php
-	if ($_SESSION['connecte'] == 1){
-	//	$_SESSION = array();
-			session_destroy();
-			echo "<div class=\"information\">Vous êtes dorénavant déconnecté, vous allez être redirigé vers la page d'accueil.</br>";
-			echo "Dans le cas contraire, <a href=\"";bloginfo('url');echo "/espace-adherent\">cliquez ici</a></div>";	
-	}
-	else{
-		echo "Vous n'êtes pas connecté";
-	}
+	formulaireOubliPassword("/wordpressKevin/mot-de-passe-oublie");
 ?>	
-<meta http-equiv="refresh" content="0;url=<?php bloginfo('url');?>" />
 </div><!-- end content -->
 </div><!-- end main-holder -->
 </div><!-- main-area -->

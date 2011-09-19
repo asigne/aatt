@@ -1,7 +1,10 @@
 <?php
 /*
-Template Name: Full Width Logout
+Template Name: Full Width Identification
 */
+?>
+<?php
+  //   session_start();
 ?>
 <?php get_header(); ?>
 </div><!-- header-area -->
@@ -26,17 +29,28 @@ load_template(TEMPLATEPATH . '/functions/global/subnav-horizontal.php');}else{
 <div id="content" class="content_full_width">
 
 <?php
-	if ($_SESSION['connecte'] == 1){
-	//	$_SESSION = array();
-			session_destroy();
-			echo "<div class=\"information\">Vous êtes dorénavant déconnecté, vous allez être redirigé vers la page d'accueil.</br>";
-			echo "Dans le cas contraire, <a href=\"";bloginfo('url');echo "/espace-adherent\">cliquez ici</a></div>";	
-	}
-	else{
-		echo "Vous n'êtes pas connecté";
+	if ($_SESSION['connecte'] == 0){
+?>
+		<form action="espace-adherent/" method="post">
+			<table>
+				<tr>
+					<td><label>Identifiant :</label></td>
+					<td><input type="text" name="identifiant" /></td>
+				</tr>
+				<tr>
+					<td><label>Mot de pass :</label>
+					<td><input type="password" name="pass"/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Se connecter" /></td>
+				</tr>
+			</table>	
+		</form>
+<?php
 	}
 ?>	
-<meta http-equiv="refresh" content="0;url=<?php bloginfo('url');?>" />
+
 </div><!-- end content -->
 </div><!-- end main-holder -->
 </div><!-- main-area -->

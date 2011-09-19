@@ -26,7 +26,7 @@ load_template(TEMPLATEPATH . '/functions/global/subnav-horizontal.php');}else{
 <div id="content" class="content_full_width">
 
 <?php
-	formulaireOubliPassword("/wordpressKevin/mot-de-passe-oublie");
+	formulaireOubliPassword(get_bloginfo('url')."/mot-de-passe-oublie");
 ?>	
 </div><!-- end content -->
 </div><!-- end main-holder -->

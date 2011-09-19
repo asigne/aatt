@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Left Nav ModifAdherent
+Template Name: Left Nav gestionAdherents
 */
 ?>
 <?php get_header(); ?>
@@ -32,9 +32,10 @@ Template Name: Left Nav ModifAdherent
 			</div><!-- end sub_nav -->
 	<?php } ?>		
 			<div id="content">
-			<?php 
-			$data = mysql_fetch_array(mysql_query("SELECT * FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe and a.idAdherent=".$_GET['id']));	
-			formulaireModification(get_bloginfo('url')."/administration/gestion-des-adherents/modifier-un-adherent/", $data, 1);	?>
+<?php //if(have_posts()) : while(have_posts()) : the_post(); the_content(); endwhile; endif;
+			$query = mysql_query("SELECT a.idAdherent, a.nom, a.prenom, a.mail, a.telportable, a.acces, e.nomEquipe, a.civilite FROM kv_adherents a, kv_equipes e where e.idEquipe=a.idEquipe");	
+			affichageAdherent($query);
+		?>	
 			
 			</div><!-- end content -->
 <?php
