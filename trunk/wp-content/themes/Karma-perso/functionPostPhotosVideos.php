@@ -2,9 +2,8 @@
 add_action( 'init', 'create_photosvideos_types' );
 function create_photosvideos_types()
 {
-    add_theme_support( 'post-thumbnails', array( 'post', 'photosvideos' ) );
-    set_post_thumbnail_size( 150, 150, true);
-    //add_image_size( 'single-post-thumbnail', 400, 9999 );
+   // add_theme_support( 'post-thumbnails', array( 'post', 'photosvideos' ) );
+   // set_post_thumbnail_size( 150, 150, true);
 
     register_post_type( 'photosvideos',
          array(

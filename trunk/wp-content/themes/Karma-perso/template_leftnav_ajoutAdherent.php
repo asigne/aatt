@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Left Nav AjoutAdherent
+Template Name: Left Nav AjoutRencontre
 */
 ?>
 <?php get_header(); ?>

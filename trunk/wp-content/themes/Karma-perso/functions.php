@@ -1,7 +1,32 @@
 <?php
 require_once('dataBaseConfig.php');
-require_once('functionPostResultat.php');
-require_once('functionPostPhotosVideos.php');
+//require_once('functionPostResultat.php');
+//require_once('functionPostPhotosVideos.php');
+//require_once('functionPostNews.php');
+//require_once('functionPostInfos.php');
+require_once('functionPost.php');
+
+function formulaireLogin(){
+	echo'<form method="post" id="UserHomeForm" action="'.get_bloginfo('url').'/espace-adherent">
+				<table>
+					<tr>
+						<td><label for="UserId"><span class="mark">&nbsp;</span>Email:</label></td>						
+						<td><span class="text"><input class="adresse" type="text" id="UserId" name="identifiant"></span></td>
+					</tr>
+					<tr>
+						<td><label for="UserPassword"><span class="mark">&nbsp;</span>Mot de passe:</label></td>						
+						<td><span class="text"><input type="password" id="UserPassword" name="pass"></span></td>
+					</tr>
+					<tr>
+						<td><input type="submit" value="Se connecter" id="LoginButton" class="account-submit"></td>
+						<td><a href="mot-de-passe-oublie">Mot de passe oublié ?</a></td>
+					</tr>
+					<tr>
+						<td><input type="hidden" value="POST" name="_method"></td>
+					</tr>
+				</table>
+			</form>';
+}
 
 function formulaireInscription($page, $mode){
 	if($_POST['verif'] != "ok"){
@@ -447,8 +472,56 @@ function formulaireOubliPassword($page){
 	}
 }
 
+function formulaireAjoutRencontre($page, $mode){
+	if($_POST['verif'] != "ok"){
+		echo '<form id="formRencontre" name="formRencontre" action='.$page.' method="post">
+				<table>
+					<tr>
+						<td><label id="faEquipe1">Equipe 1 :</label></td>
+						<td id="choixEquipe1">';
+							listeEquipeCustom($param, "equipe1", "equipeChange(1)");	
+		echo			'</td>
+						<td><label id="faEquipe2">Equipe 2 :</label></td>
+						<td id="choixEquipe2" >';
+							listeEquipeCustom($param, "equipe2", "equipeChange(2)");
+		echo			'</td>
+					</tr>
+				</table>';
+		echo'<table>
+					<tr>
+						<td id="listeJ1">
+						</td>
+						<td id="listeJ2">
+						</td>
+					</tr>
+			</table>';
+		echo'<input type="hidden" name="verif" value="ok"/></td>';
+		echo'<input id="faValider" type="submit" value="Valider" onclick="return validerFormAjoutRencontre()" />';
+		echo'</form>';
+	}
+	else{
+		//inscription dans la base		
+		/*if($mode){
+			$req = "INSERT INTO kv_adherents VALUES ('','".$_POST['mail']."','".md5($_POST['pass'])."','".strtoupper($_POST['nom'])."','".ucfirst($_POST['prenom'])."','".$_POST['adresse']."','".$_POST['codePostal']."','".strtoupper($_POST['ville'])."','".$_POST['fixe']."','".$_POST['portable']."','".$_POST['classement']."','0', '".$_POST['acces']."','".$_POST['equipe']."','".$_POST['civilite']."')";
+		}
+		else{
+			$req = "INSERT INTO kv_adherents VALUES ('','".$_POST['mail']."','".md5($_POST['pass'])."','".strtoupper($_POST['nom'])."','".ucfirst($_POST['prenom'])."','".$_POST['adresse']."','".$_POST['codePostal']."','".strtoupper($_POST['ville'])."','".$_POST['fixe']."','".$_POST['portable']."','','0', '0','".$_POST['equipe']."','".$_POST['civilite']."')";
+		}
+		$reqVerif = "select * FROM kv_adherents WHERE mail='".$_GET['mail']."'";
+		if(!mysql_fetch_array(mysql_query($reqVerif))){
+			$query = mysql_query($req);
+		}		
+		if($mode){
+			echo '<meta http-equiv="refresh" content="0;url=administration/gestion-des-adherents/" />';
+		}
+		else{
+			echo '<div class="information">Votre compte a été crée avec succès, vous recevrez un email dès que l\'administrateur aura validé votre inscription !</div>';
+		}*/
+	}
+}
+
 function listeEquipe($param){	
-	echo "<select name='equipe' value='".$param."'> ";
+	echo "<select id='".$id."' name='equipe' value='".$param."'> ";
 	$query = mysql_query('select * from kv_equipes ORDER BY nomEquipe');
 	echo "<option value='null' selected='selected'></option>\n";
 	while($dataEquipe = mysql_fetch_array($query)){
@@ -461,6 +534,22 @@ function listeEquipe($param){
 	}
 echo "</select>";
 }
+
+function listeEquipeCustom($param, $id, $fc){	
+	echo "<select id='".$id."' name='".$id."' onchange='javascript:".$fc."' value='".$param."'> ";
+	$query = mysql_query('select * from kv_equipes ORDER BY nomEquipe');
+	echo "<option value='null' selected='selected'></option>\n";
+	while($dataEquipe = mysql_fetch_array($query)){
+		if($dataEquipe["idEquipe"]==$param){
+			echo "<option selected='selected' value=".$dataEquipe[0].">".$dataEquipe[1]."</option>\n";
+		}
+		else{
+			echo "<option value=".$dataEquipe[0].">".$dataEquipe[1]."</option>\n";
+		}	
+	}
+echo "</select>";
+}
+
 
 function wd_generatePassword($length=8, $possible='$=@#23456789bcdfghjkmnpqrstvwxyz'){
     $password = '';
@@ -544,4 +633,46 @@ function listeCivilite($param) {
 		}
 	echo'</select>';
 }
+
+function displaySliderCustomPost($customPostSelect){
+	echo '<div id="slideshow">';
+		$args = array('post_type' => $customPostSelect);
+		$loop = new WP_Query($args);
+		while ($loop->have_posts()) : $loop->the_post();
+			echo '<div>';
+					the_post_thumbnail();
+					echo'<div  class="citation">
+						<h5>';
+						the_title();
+					echo'</h5>';
+						the_content();
+					echo '</div>
+				</div>';
+		endwhile;
+	echo'</div>';
+}
+
+function displayInfos($customPostSelect){
+	echo '<ul>';
+		$args = array('post_type' => $customPostSelect);
+		$loop = new WP_Query($args);
+		while ($loop->have_posts()) : $loop->the_post();
+			echo '<li id="infos">';
+					echo'	<h6>
+						<a href="'.get_permalink( $post ).'">';
+						the_title();
+						echo'</a>';
+					echo'</h6>';
+						the_excerpt();
+			echo '</li>';
+		endwhile;
+		echo '</ul>';
+}
+
+function new_excerpt_more($more) {
+       global $post;
+	return '<a href="'. get_permalink($post->ID) . '">Read the Rest...</a>';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
 ?>

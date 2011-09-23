@@ -54,8 +54,8 @@ aside h3 {
 #menu-main-nav {
     float: right;
     list-style: none outside none;
-    margin-top: 85px;
-    padding: 0;
+    padding-top: 40px;
+    margin: 0;
 }
 
 #menu-main-nav li {
@@ -76,6 +76,11 @@ aside h3 {
 .widgettitle {
     font-size: 1.7em;
     display:none;
+}
+
+.btns{
+	padding-top:20px;
+	text-align:right;
 }
 
 .login{
@@ -133,11 +138,9 @@ aside h3 {
     width: 186px;
     display: none;
 //    border: 1px solid #CCC;
-    /*background: transparent url("images/btn-sign-bottom.png") no-repeat bottom;*/
-    background: transparent url("images/btn-login-repeat.png") repeat-y ;
+    /*background: url("images/btn-sign-bottom.png") no-repeat bottom;*/
+    background: url("images/btn-login-repeat.png") repeat-y ;
 }
-
-
 
 #login-bottom{
 	background: url("images/btn-login-bottom.png") no-repeat bottom;
@@ -311,4 +314,44 @@ html{
 	width:20px;
 }
 
+#menu-main-nav li strong {
+    letter-spacing:0px;
+}
+
+table{
+	font-size:14px;
+}
+
+#listeJ1{
+	width:270px;
+	text-align:center;
+}
+
+#listeJ2{
+	width:220px;
+	text-align:center;
+}
+
+#choixEquipe1{
+	width:180px;
+}
+
+table td, table th {
+    padding: 3px;
+}
+
+#sidebar{
+	color:black;
+	font-size:16px;
+}
+
+#infos h6{
+		font-size:12px;
+		margin:0px;
+		padding:0px;
+}
+
+#infos{
+		font-size:12px;
+}
 /* ------- Insert custom styles below this line ------- */
