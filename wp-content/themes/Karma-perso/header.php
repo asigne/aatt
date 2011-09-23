@@ -7,6 +7,7 @@
 	mysql_select_db(MY_BASE, $link);
 	
 	wp_enqueue_script("pop","/wp-content/themes/Karma-perso/js/script.js");
+	wp_enqueue_script("pop1","/wp-content/themes/Karma-perso/js/scriptNews.js");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
@@ -62,55 +63,24 @@ if ($custom_logo_text == ''){
 
 <?php
 	if ($_SESSION['connecte'] == 0){
-?>
-		<a class="creerCompte ka_button small_button small_skyblue" href="creerCompte" style="opacity: 1;"><span>Créer un compte</span></a>
-		<a class="login ka_button small_button small_skyblue" href="javascript:void(0);" style="opacity: 1;"><span>Etes-vous adhérent ?</span></a>
-		<div id="login-popup">
-                    <form method="post" id="UserHomeForm" class="form account-form jqtransformdone" action="<?php bloginfo('url'); ?>/espace-adherent"><div style="display:none;"><input type="hidden" value="POST" name="_method"></div>                        <fieldset>
-                            <div class="form-holder">
-                                <div class="form-section">
-                                    <div class="row">
-                                        <label for="UserId"><span class="mark">&nbsp;</span>Email:</label>
-                                        <div class="input-block">
-                                            <span class="text"><input type="text" id="UserId" name="identifiant"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <label for="UserPassword"><span class="mark">&nbsp;</span>Mot de passe:</label>
-
-                                        <div class="input-block">
-                                            <span class="text"><input type="password" id="UserPassword" name="pass"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="align-center">
-                                        <a href="mot-de-passe-oublie">Mot de passe oublié ?</a>                                    </div>
-                                </div>
-                                <div class="submit"><input type="submit" value="Se connecter" id="LoginButton" class="account-submit"></div>
-                            </div>
-                        </fieldset>
-                    </form>           
-        			<div id="login-bottom"></div>
-        </div>
-    	
-<?php
+		echo'<div class="btns">
+			<a class="ka_button small_button small_skyblue" href="creerCompte" style="opacity: 1;"><span>Créer un compte</span></a>
+			<a class="ka_button small_button small_skyblue" href="login" style="opacity: 1;"><span>Etes-vous adhérent ?</span></a>
+		</div>';   	
 	}
 	else{
-?>
-		<a class="logout ka_button small_button small_skyblue" href="logout" style="opacity: 1;"><span>Se déconnecter</span></a>
-		<a class="espace-adherent ka_button small_button small_skyblue" href="espace-adherent" style="opacity: 1;"><span>Espace adhérent</span></a>
-<?php	if ($_SESSION['droits'] == 1){	?>
-			<a class="espace-administration ka_button small_button small_skyblue" href="administration" style="opacity: 1;"><span>Administration</span></a>
-<?php
+		echo'<div class="btns">';
+		if ($_SESSION['droits'] == 1){
+			echo'<a class="ka_button small_button small_skyblue" href="administration" style="opacity: 1;"><span>Administration</span></a>';
 		}
-		else{?>
-			<a class="espace-profil ka_button small_button small_skyblue" href="espace-adherent/mon-profil" style="opacity: 1;"><span>Mon Profil</span></a>
-<?php	}
+		else{
+			echo'<a class="ka_button small_button small_skyblue" href="espace-adherent/mon-profil" style="opacity: 1;"><span>Mon Profil</span></a>';
+		}
+	echo'<a class="ka_button small_button small_skyblue" href="espace-adherent" style="opacity: 1;"><span>Espace adhérent</span></a>	
+		<a class="ka_button small_button small_skyblue" href="logout" style="opacity: 1;"><span>Se déconnecter</span></a>		
+		</div>';
 	}
 ?>
-
-
 
 <?php if(has_nav_menu('Primary Navigation')):
 echo '<ul id="menu-main-nav">';

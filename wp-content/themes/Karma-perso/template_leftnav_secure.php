@@ -51,7 +51,8 @@ Template Name: Left Nav Secure
 				echo '<div class="erreur">
 						<h1>Echec de la connexion</h1>
 						<h5>Login ou mot de passe érroné. Veuillez resaisir vos identifiants</h5>				
-					<div>';	
+					</div>';	
+				formulaireLogin();	
 			}
 		}
 		else{
@@ -59,6 +60,7 @@ Template Name: Left Nav Secure
 					<h1>Echec de la connexion</h1>
 					<h5>Vous avez certainement oublié un champ. Veuillez réessayer !</h5>			
 				</div>';
+			formulaireLogin();
 		}
 	}
 	else{

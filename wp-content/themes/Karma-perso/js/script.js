@@ -339,3 +339,47 @@ function validatePhone(num) {
 	}
 	return true;
 }
+
+function equipeChange(listeJ){
+	if(listeJ == 1){
+		jQuery.ajax({
+			type: 'GET',
+			url: '	/wordpressKevin/ajax.php',
+			data: "action=listeJoueurs1&idEquipe="+jQuery("#equipe1").val(),
+			dataType:'text',
+			success: function(text){
+				if(text!=""){
+					var newtable = document.createElement('table');
+					newtable.innerHTML = text;
+					jQuery("#listeJ1").html(newtable);
+					jQuery("#matchNum").show();
+				}
+				else{
+					alert('erreur');
+				}
+			},
+			error: function() {alert('Erreur, impossible de contacter le serveur.');}
+		});  
+	}
+	else if(listeJ == 2){
+		jQuery.ajax({
+			type: 'GET',
+			url: '/wordpressKevin/ajax.php',
+			data: "action=listeJoueurs2&idEquipe="+jQuery("#equipe2").val(),
+			dataType:'text',
+			success: function(text){
+			if(text!=""){
+					var newtable = document.createElement('table');
+					newtable.innerHTML = text;
+					jQuery("#listeJ2").html(newtable);
+					jQuery("#matchNum").show();
+				}
+				else{
+					alert('erreur');
+				}
+			},
+			error: function() {alert('Erreur, impossible de contacter le serveur.');}
+		});  
+	   
+	}
+}
